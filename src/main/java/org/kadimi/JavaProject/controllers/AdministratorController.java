@@ -1,5 +1,6 @@
 package org.kadimi.JavaProject.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityTransaction;
@@ -30,6 +31,21 @@ public class AdministratorController extends UserController {
 			return null;
 		}
 	}	
+	
+	public List<Offer> getOffers() {
+		EntityTransaction transaction = em.getTransaction();
+		transaction.begin();
+		try {
+			Query query=this.em.createQuery("SELECT o FROM Offer o");
+			transaction.commit();
+			return query.getResultList();
+		}catch(Exception e) {
+			transaction.rollback();
+			System.out.println("Erreur Fetching Offers");
+			e.getStackTrace();
+			return null;
+		}
+	}
 	
 	public void removeUser(int id) {
 		EntityTransaction transaction = em.getTransaction();
@@ -62,20 +78,45 @@ public class AdministratorController extends UserController {
 		}
 	}
 	
-	public void javaSoup() {
+	public void removeAllOffers() {
+		
+		EntityTransaction transaction = em.getTransaction();
+		try {
+			List<Offer> offersList = this.getOffers();
+			for (Offer offer : offersList) {
+				transaction.begin();
+				offer = em.find(Offer.class, offer.getIdOffer());
+				em.remove(offer);
+				transaction.commit();
+			}
+		}catch(Exception e) {
+			transaction.rollback();
+			System.out.println("Removing Offers failed");
+			throw e;
+		}
+		
+	}
+	
+	public List<Offer> javaSoup() throws IOException {
+		this.removeAllOffers();
 		List<Offer> offers = wsc.extractOffers();
 		EntityTransaction transaction = em.getTransaction();
 		for (Offer offer : offers) {
-			transaction.begin();
-			try {
-				this.em.persist(offer);
-				transaction.commit();
-			} catch (Exception e) {
-				System.out.println("Error to add user");
-				transaction.rollback();
-				throw e;
+			if(offer.getContract() == null) {
+				continue;
+			}else {
+				transaction.begin();
+				try {
+					this.em.persist(offer);
+					transaction.commit();
+				} catch (Exception e) {
+					System.out.println("Error to add user");
+					transaction.rollback();
+					throw e;
+				}
 			}
 		}
+		return offers;
 	}
 	
 }

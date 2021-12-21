@@ -84,7 +84,11 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.14.3</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.apache.opennlp</groupId>
+			<artifactId>opennlp-tools</artifactId>
+			<version>1.9.4</version>
+		</dependency>
 	</dependencies>
 	<properties>
 		<jersey.version>3.0.3</jersey.version>

@@ -17,7 +17,7 @@ public class UserController {
 	}
 
 	public void addUser(String competences) {
-		String tokens[] = competences.split(",");
+//		String tokens[] = competences.split(",");
 //		List<String> listeComptences = Arrays.asList(tokens);
 //		User user = new User(competences,liste);
 //		System.out.println(user.getCompetencesList().toString());

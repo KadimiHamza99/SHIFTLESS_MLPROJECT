@@ -2,6 +2,7 @@ package org.kadimi.JavaProject.resources;
 
 import org.kadimi.JavaProject.controllers.UserController;
 
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -26,6 +27,5 @@ public class UserResource {
 			e.getStackTrace();
 			return "adding user failed";
 		}	
-	}
-	
+	}	
 }

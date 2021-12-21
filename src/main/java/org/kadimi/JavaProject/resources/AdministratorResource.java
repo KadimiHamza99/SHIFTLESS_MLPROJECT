@@ -3,6 +3,7 @@ package org.kadimi.JavaProject.resources;
 import java.util.List;
 
 import org.kadimi.JavaProject.controllers.AdministratorController;
+import org.kadimi.JavaProject.models.Offer;
 import org.kadimi.JavaProject.models.User;
 
 import jakarta.ws.rs.DELETE;
@@ -53,14 +54,15 @@ public class AdministratorResource {
 	}
 	
 	@GET
+	@Path("/scraping")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String fetchData() {
+	public List<Offer> fetchData() {
 		try {
-			//scraping function in adminstratorController class
-			return "web scraping succeded";
+			return ac.javaSoup();
 		}catch(Exception e) {
-			return e.getMessage();
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
 }

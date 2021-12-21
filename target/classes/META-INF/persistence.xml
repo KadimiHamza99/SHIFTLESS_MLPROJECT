@@ -15,7 +15,7 @@
 				value="jdbc:mysql://localhost:3306/MLPROJECT" />
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.connection.password" value="1949" />
-			<property name="hibernate.hbm2ddl.auto" value="create"></property> 
+			<property name="hibernate.hbm2ddl.auto" value="update"></property> 
 			<property name="hibernate.show_sql" value="true"></property>
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL5Dialect"></property>

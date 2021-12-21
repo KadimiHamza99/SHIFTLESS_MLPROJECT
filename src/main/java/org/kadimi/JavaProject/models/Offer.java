@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 @Entity
 @Table(name="OFFER")
 public class Offer {
@@ -16,38 +15,47 @@ public class Offer {
 	@Column(name="ID_USER")
 	private Long IdOffer;
 	@Column(name="TITLE",length=1000)
-//	@Transient
 	private String title;
 	@Column(name="NAME",length=1000)
-//	@Transient
 	private String name;
 	@Column(name="CONTRACT",length=50)
 	private String contract;
 	@Column(name="STUDIES_LEVEL",length=6000)
-//	@Transient
 	private String level;
-//	@Column(name="REQUIREMENTS",length=60000)
-	@Transient
-	private String req;
+	@Column(name="REQUIREMENTS",length=6000)
 //	@Transient
-	@Column(name="LOCATION")
-	private String Location;
+	private String req;
+	@Column(name="LINK",length=300)
+	private String link;
+//	@Transient
+//	@Column(name="LOCATION")
+//	private String Location;
 	
-	public Offer(String title, String name, String contract, String level, String req) {
+	
+	public Offer(String title, String name, String contract, String level, String req, String link) {
 		super();
 		this.title = title;
 		this.name = name;
 		this.contract = contract;
 		this.level = level;
 		this.req = req;
+		this.link = link;
 	}
-	
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
 	public Offer() {	}
 	
 	@Override
 	public String toString() {
 		return "Offer [IdOffer=" + IdOffer + ", title=" + title + ", name=" + name + ", contract=" + contract
-				+ ", level=" + level + ", req=" + req + "]";
+				+ ", level=" + level + ", req=" + req + ", link=" + link + "]";
 	}
 
 	public Long getIdOffer() {
@@ -83,12 +91,12 @@ public class Offer {
 	public void setReq(String req) {
 		this.req = req;
 	}
-	public String getLocation() {
-		return Location;
-	}
-
-	public void setLocation(String location) {
-		Location = location;
-	}
+//	public String getLocation() {
+//		return Location;
+//	}
+//
+//	public void setLocation(String location) {
+//		Location = location;
+//	}
 
 }

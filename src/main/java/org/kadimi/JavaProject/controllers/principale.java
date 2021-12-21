@@ -1,8 +1,10 @@
 package org.kadimi.JavaProject.controllers;
 
+import java.io.IOException;
+
 public class principale {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		AdministratorController ac = new AdministratorController();
 		ac.javaSoup();
