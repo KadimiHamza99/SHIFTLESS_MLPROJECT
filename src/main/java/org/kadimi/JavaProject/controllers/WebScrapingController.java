@@ -15,7 +15,6 @@ import org.kadimi.JavaProject.models.Offer;
 public class WebScrapingController {
 
 	private static final String Company = "#fortopscroll > div.container.anno > div:nth-child(2) > div > div.foruloffemp.col-md-12.blc > h4 > strong";
-//	private static final String Location = "#fortopscroll > div.container.anno > div:nth-child(2) > div > div.col-md-12.info.blc.noback > div > div > div.col-md-10.col-sm-12.col-xs-12 > ul:nth-child(3) > li:nth-child(2)";
 	private static final String contract = "tagContrat";
 	private static final String Requirement = "#fortopscroll > div.container.anno > div:nth-child(2) > div > div:nth-child(5)";
 	private static final String JOB_CARD_CLASS = "section";
@@ -23,14 +22,14 @@ public class WebScrapingController {
 	private static final String TITLE = "h1";
 
 	private static final String technologiesFile = "C:\\JAVAEE\\JavaProject\\ressources\\technologies.txt";
-
+	
 	protected List<String> getLinks() {
 
 //		final String JOB_LEVEL_SELECTOR = "div.section div.holder";
 		List<String> links = new ArrayList<String>();
 
 		Document document = null;
-		for (int i = 1; i < 2; i++) {
+		for (int i = 1; i < 11; i++) {
 			try {
 				document = Jsoup.connect("https://www.rekrute.com/offres.html?s=3&p=" + i + "&o=1&sectorId%5B0%5D=24")
 						.userAgent("Mozilla").data("name", "jsoup").get();
@@ -44,7 +43,7 @@ public class WebScrapingController {
 				Elements linkElements = jobElement.select(JOB_LINK_SELECTOR);
 
 				if (!linkElements.isEmpty()) {
-					links.add(linkElements.get(0).attr("href"));
+	 				links.add(linkElements.get(0).attr("href"));
 				}
 			}
 		}
@@ -66,16 +65,11 @@ public class WebScrapingController {
 			}
 			Offer offer1 = new Offer();
 
-			Elements titleElements = doc1.select(TITLE);
-			if (!titleElements.isEmpty()) {
-				offer1.setTitle(titleElements.get(0).text());
+			Elements levelElements = doc1.select(
+					"#fortopscroll > div.container.anno > div:nth-child(2) > div > div.col-md-12.info.blc.noback > div > div > div.col-md-10.col-sm-12.col-xs-12 > ul:nth-child(3) > li:nth-child(3)");
+			if (!levelElements.isEmpty()) {
+				offer1.setLevel(levelElements.get(0).text());
 			}
-
-//			Elements levelElements = doc1.select(
-//					"#fortopscroll > div.container.anno > div:nth-child(2) > div > div.col-md-12.info.blc.noback > div > div > div.col-md-10.col-sm-12.col-xs-12 > ul:nth-child(3) > li:nth-child(3)");
-//			if (!levelElements.isEmpty()) {
-//				offer1.setLevel(levelElements.get(0).text());
-//			}
 			Elements NameElements = doc1.select(Company);
 			if (!NameElements.isEmpty()) {
 				String n = NameElements.get(0).text();
@@ -86,6 +80,12 @@ public class WebScrapingController {
 			Elements ContractElements = doc1.getElementsByClass(contract);
 			if (!ContractElements.isEmpty()) {
 				offer1.setContract(ContractElements.get(0).text());
+			}
+			Elements titleElements = doc1.select(TITLE);
+			if (!titleElements.isEmpty() && offer1.getContract() != null) {
+				String[] parts = titleElements.get(0).text().split("-");
+				offer1.setTitle(parts[0].trim());
+				offer1.setLocation(parts[1].trim());
 			}
 			Elements requirementElements = doc1.select(Requirement);
 			if (!requirementElements.isEmpty()) {
@@ -101,14 +101,6 @@ public class WebScrapingController {
 			}
 			offer1.setLink(link);
 
-//			Elements locationElements = doc1.select(Location);
-//			if (!locationElements.isEmpty()) {
-//				String n = locationElements.get(0).text();
-//				n = n.replace("poste(s) sur ", "");
-//				n = n.replaceAll("[0-9]", "");
-//
-//				offer1.setLocation(n);
-//			}
 			offers.add(offer1);
 
 		}
@@ -117,6 +109,7 @@ public class WebScrapingController {
 
 		}
 		System.out.println(offers.size());
+		
 		return offers;
 	}
 
@@ -130,13 +123,21 @@ public class WebScrapingController {
 			line = br.readLine();
 		}
 		br.close();
-		//save technologies on a arrayList
-		ArrayList<String> returnList = new ArrayList<String>(); 
+		// save technologies on a arrayList
+		ArrayList<String> returnList = new ArrayList<String>();
+		ArrayList<String> rl = new ArrayList<String>();
 		req = req.toLowerCase().trim().replaceAll("\\s+", " ").replaceAll("\\p{Punct}", "");
 		for (String t : techs) {
-			if(req.contains(" "+t+" ") && t!=null) returnList.add(t);
+			if (req.contains(" " + t + " ") && t != null)
+				rl.add(t);
 		}
-		//return converted techs List to string
-		return String.join(",", returnList);
+		// remove duplicates
+		for (String string : rl) {
+			if (!returnList.contains(string))
+				returnList.add(string);
+		}
+		// return converted techs List to string
+		return String.join(" , ", returnList);
 	}
+
 }

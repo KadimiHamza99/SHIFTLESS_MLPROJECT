@@ -27,19 +27,20 @@ public class Offer {
 	private String req;
 	@Column(name="LINK",length=300)
 	private String link;
-//	@Transient
-//	@Column(name="LOCATION")
-//	private String Location;
-	
-	
-	public Offer(String title, String name, String contract, String level, String req, String link) {
+	@Column(name="LOCATION")
+	private String Location;
+
+	public Offer(Long idOffer, String title, String name, String contract, String level, String req, String link,
+			String location) {
 		super();
+		IdOffer = idOffer;
 		this.title = title;
 		this.name = name;
 		this.contract = contract;
 		this.level = level;
 		this.req = req;
 		this.link = link;
+		Location = location;
 	}
 
 	public String getLink() {
@@ -55,7 +56,7 @@ public class Offer {
 	@Override
 	public String toString() {
 		return "Offer [IdOffer=" + IdOffer + ", title=" + title + ", name=" + name + ", contract=" + contract
-				+ ", level=" + level + ", req=" + req + ", link=" + link + "]";
+				+ ", level=" + level + ", req=" + req + ", link=" + link + ", Location=" + Location + "]";
 	}
 
 	public Long getIdOffer() {
@@ -91,12 +92,12 @@ public class Offer {
 	public void setReq(String req) {
 		this.req = req;
 	}
-//	public String getLocation() {
-//		return Location;
-//	}
-//
-//	public void setLocation(String location) {
-//		Location = location;
-//	}
+	public String getLocation() {
+		return Location;
+	}
+
+	public void setLocation(String location) {
+		Location = location;
+	}
 
 }

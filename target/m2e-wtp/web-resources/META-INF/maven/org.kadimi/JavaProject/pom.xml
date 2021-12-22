@@ -85,9 +85,14 @@
 			<version>1.14.3</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.opennlp</groupId>
-			<artifactId>opennlp-tools</artifactId>
-			<version>1.9.4</version>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>nz.ac.waikato.cms.weka</groupId>
+			<artifactId>weka-dev</artifactId>
+			<version>3.9.5</version>
 		</dependency>
 	</dependencies>
 	<properties>

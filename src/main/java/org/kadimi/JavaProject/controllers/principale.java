@@ -1,24 +1,22 @@
 package org.kadimi.JavaProject.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class principale {
+	private static final String arff = "C:\\JAVAEE\\JavaProject\\ressources\\Offers-test.arff";
 
 	public static void main(String[] args) throws IOException {
-
-		AdministratorController ac = new AdministratorController();
-		ac.javaSoup();
-//		ac.addUser("java,jee,hibernate,springboot,springmvc");
-//
-//		List<User> liste = ac.getUsers();
-//
-//		for (User user : liste) {
-//			System.out.println(user.getId() + " ----> " + user.getCompetences());
-//		}
-//
-//		ac.removeAllUsers();
-		
-//		WebScrapingController wsc = new WebScrapingController();
-//		wsc.extractOffers();
+		UserController uc = new UserController();
+		try {
+			ArrayList<ArrayList<String>> Predictions = uc.predict(arff);
+			for (ArrayList<String> array : Predictions) {
+				for (String str : array) {
+					System.out.println(str);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
