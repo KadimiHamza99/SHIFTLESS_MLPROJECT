@@ -1,8 +1,11 @@
 package org.kadimi.JavaProject.resources;
 
+
+
 import java.util.List;
 
 import org.kadimi.JavaProject.controllers.AdministratorController;
+import org.kadimi.JavaProject.models.EvaluationResults;
 import org.kadimi.JavaProject.models.Offer;
 import org.kadimi.JavaProject.models.User;
 
@@ -15,6 +18,8 @@ import jakarta.ws.rs.core.MediaType;
 
 @Path("/admin")
 public class AdministratorResource {
+	private static final String arff = "C:\\JAVAEE\\JavaProject\\ressources\\Offers-test.arff";
+
 
 	AdministratorController ac = new AdministratorController();
 	
@@ -59,6 +64,29 @@ public class AdministratorResource {
 	public List<Offer> fetchData() {
 		try {
 			return ac.javaSoup();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@GET
+	@Path("/J48")
+	@Produces(MediaType.APPLICATION_JSON)
+	public EvaluationResults J48() {
+		try {
+			return ac.predictJ48(arff);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GET
+	@Path("/NB")
+	@Produces(MediaType.APPLICATION_JSON)
+	public EvaluationResults NB() {
+		try {
+			return ac.predictNB(arff);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

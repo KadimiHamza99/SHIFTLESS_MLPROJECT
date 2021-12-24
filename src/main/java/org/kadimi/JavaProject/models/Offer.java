@@ -62,6 +62,9 @@ public class Offer {
 	public Long getIdOffer() {
 		return IdOffer;
 	}
+	public void setIdOffer(long id) {
+		this.IdOffer = id;
+	}
 	public String getTitle() {
 		return title;
 	}
