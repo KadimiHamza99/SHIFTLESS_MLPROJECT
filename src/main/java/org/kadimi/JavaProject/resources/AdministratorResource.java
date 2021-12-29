@@ -93,4 +93,40 @@ public class AdministratorResource {
 		return null;
 	}
 	
+	@GET
+	@Path("/IBk")
+	@Produces(MediaType.APPLICATION_JSON)
+	public EvaluationResults IBk() {
+		try {
+			return ac.predictIBk(arff);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GET
+	@Path("/AB")
+	@Produces(MediaType.APPLICATION_JSON)
+	public EvaluationResults AdaBoostM1() {
+		try {
+			return ac.predictAdaBoostM1(arff);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GET
+	@Path("/P")
+	@Produces(MediaType.APPLICATION_JSON)
+	public EvaluationResults PART() {
+		try {
+			return ac.predictPART(arff);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

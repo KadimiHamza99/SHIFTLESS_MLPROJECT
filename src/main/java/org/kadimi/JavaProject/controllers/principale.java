@@ -9,11 +9,19 @@ public class principale {
 
 	public static void main(String[] args) throws IOException {
 	
-		EvaluationResults ER,ER1 = null;
+		EvaluationResults j48,nb,ibk,adaboostm1,part = null;
 		UserController uc = new UserController();
 		try {
-			ER=uc.predictJ48(arff);
-			ER1=uc.predictNB(arff);
+			System.out.println("J48 test");
+			j48=uc.predictJ48(arff);
+			System.out.println("Naive Bayes test");
+			nb=uc.predictNB(arff);
+			System.out.println("IBk test");
+			ibk=uc.predictIBk(arff);
+			System.out.println("AdaBoostM1 test");
+			adaboostm1=uc.predictAdaBoostM1(arff);
+			System.out.println("logitboost test");
+			part=uc.predictPART(arff);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

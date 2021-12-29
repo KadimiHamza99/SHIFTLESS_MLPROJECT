@@ -32,14 +32,12 @@ public class UserResource {
 		
 	}
 	
-	private static final String offersPredict = "C:\\JAVAEE\\JavaProject\\ressources\\Offers-test.csv";
-	private static final String offersPredictArff = "C:\\JAVAEE\\JavaProject\\ressources\\Offers-test.arff";
+
 	UserController uc = new UserController();
 	
 	@POST
 	@Path("{techs}")
 	@Produces(MediaType.APPLICATION_JSON)
-//	@Consumes(MediaType.APPLICATION_JSON)
 	public List<Match> add(@PathParam("techs") String competences) {
 		List<Match> ret = new ArrayList<Match>();
 		try {
@@ -47,8 +45,17 @@ public class UserResource {
 			List<Offer> offers = new ArrayList<Offer>();
 			offers = ac.getOffers();
 			for (Offer offer : offers) {
-				Match match = new Match(offer.getName(),offer.getTitle(),offer.getLink(),offer.getLocation(),(double) 59);
-				ret.add(match);
+				String requirements = offer.getReq()+" , "+offer.getLevel();
+				competences = competences.trim().replaceAll("[.?!]", " ");
+				requirements = requirements.trim().replaceAll("[.?!]", " ");
+				// Split by space
+				String[] as0 = competences.split(" , ");
+				String[] as1 = requirements.split(" , ");
+				int matching = UserController.pecentageOfMatch(as0, as1);
+				Match match = new Match(offer.getName(),offer.getTitle(),offer.getLink(),offer.getLocation(),(double) matching);
+				if(matching > 40) {
+					ret.add(match);
+				}
 			}
 			return ret;
 		}catch(Exception e) {

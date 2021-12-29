@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>User Management</title>
+</head>
+<body>
+    
+    <div class="container">
+        <a href="./index.html">Back</a>
+        <h1 style="text-align: center;">User Management</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">COMPETENCES</th>
+                    <th scope="col">DELETE</th>
+                </tr>
+            </thead>
+            <tbody id="display">
+            </tbody>
+        </table>
+        </div>
+        <div class="d-grid gap-2" style="text-align: center;">
+            <button class="btn btn-warning" type="button" id="rmau">REMOVE ALL USERS</button>
+        </div>
+        </div>
+    <script>
+        let ResultatsAPI
+        let tag
+        fetch(`http://localhost:8080/JavaProject/webapi/admin/users`)
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            ResultatsAPI = data
+            for(let i = 0; i < ResultatsAPI.length; i++) {
+                tag += `
+                    <tr>
+                        <th>${ResultatsAPI[i].id}</th>
+                        <td>${ResultatsAPI[i].competences}</td>
+                        <td><button class='btn btn-danger ${ResultatsAPI[i].id}'>Remove</button></td>
+                    </tr>
+                `
+            }
+            $("#display").append(tag)
+            for(let i=0;i<ResultatsAPI.length;i++){
+                $('.'+ResultatsAPI[i].id).click(function(){
+                    var ajxReq = $.ajax( {
+                            url : 'http://localhost:8080/JavaProject/webapi/admin/'+ResultatsAPI[i].id,
+                            type : 'DELETE',
+                            success : function ( data ) {
+                                console.log("success remove user")
+                        },
+                        error : function ( jqXhr, textStatus, errorMessage ) {
+                            console.log(errorMessage)
+                            location.reload()
+                        }
+                    });
+                })
+            }
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+        $("#rmau").click(function(){
+            var ajxReq = $.ajax( {
+                url : 'http://localhost:8080/JavaProject/webapi/admin',
+                type : 'DELETE',
+                success : function ( data ) {
+                console.log("success remove user")
+            },
+                error : function ( jqXhr, textStatus, errorMessage ) {
+                console.log(errorMessage)
+                location.reload()
+            }
+            });
+        })
+    </script>
+</body>
+</html>

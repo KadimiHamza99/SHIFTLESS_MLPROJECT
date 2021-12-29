@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button id="j48">J48 Model Informations</button>
+    <button id="nb">NaiveBayes Model Informations</button>
+    <button id="p">PART Model Informations</button>
+    <button id="adaboostm1">AdaBoostM1 Model Informations</button>
+    <button id="ibk">IBk Model Informations</button>
+    <div id="loader" >
+
+    </div>
+    <div id="result">
+
+    </div>
+    <script>
+    $("#j48").click(function(){
+        $.ajax({
+            type:"GET",
+            url:"http://localhost:8080/JavaProject/webapi/admin/J48",
+            dataType:"json",
+            complete: function(){
+                $("#loader").hide()
+                $("#result").show()
+            },
+            success:function(data){
+                console.log(data)
+                var output=""
+                output += `
+                    <ul>
+                        <li>
+                            Correctly Classified Instances = ${data.correct}%
+                        </li>
+                        <li>
+                            Incorrectly Classified Instances = ${data.incorrect}%
+                        </li>
+                        <li>
+                            Kappa statistic = ${data.kappa}
+                        </li>
+                        <li>
+                            areaUnderROC = ${data.auROC}
+                        </li>
+                        <li>
+                            meanAbsoluteError = ${data.mae}
+                        </li>
+                        <li>
+                            Root mean squared error  = ${data.rmse}
+                        </li>
+                        <li>
+                            Relative absolute error = ${data.rae}
+                        </li>
+                        <li>
+                            Root relative squared error = ${data.rrse}
+                        </li>
+                        <li>
+                            Precision = ${data.precision}
+                        </li>
+                        <li>
+                            Recall = ${data.recal}
+                        </li>
+                        <li>
+                            Fmeasure = ${data.fmeasure}
+                        </li>
+                        <li>
+                            Error Rate = ${data.errorRate}
+                        </li>
+                    </ul>
+                `
+                $("#result").html(output)
+            },
+            error:function(){
+                $("#result").html("failed")
+            }
+        })
+    })
+    $("#nb").click(function(){
+        $.ajax({
+            type:"GET",
+            url:"http://localhost:8080/JavaProject/webapi/admin/NB",
+            dataType:"json",
+            complete: function(){
+                $("#loader").hide()
+                $("#result").show()
+            },
+            success:function(data){
+                console.log(data)
+                var output=""
+                output += `
+                    <ul>
+                        <li>
+                            Correctly Classified Instances = ${data.correct}%
+                        </li>
+                        <li>
+                            Incorrectly Classified Instances = ${data.incorrect}%
+                        </li>
+                        <li>
+                            Kappa statistic = ${data.kappa}
+                        </li>
+                        <li>
+                            areaUnderROC = ${data.auROC}
+                        </li>
+                        <li>
+                            meanAbsoluteError = ${data.mae}
+                        </li>
+                        <li>
+                            Root mean squared error  = ${data.rmse}
+                        </li>
+                        <li>
+                            Relative absolute error = ${data.rae}
+                        </li>
+                        <li>
+                            Root relative squared error = ${data.rrse}
+                        </li>
+                        <li>
+                            Precision = ${data.precision}
+                        </li>
+                        <li>
+                            Recall = ${data.recal}
+                        </li>
+                        <li>
+                            Fmeasure = ${data.fmeasure}
+                        </li>
+                        <li>
+                            Error Rate = ${data.errorRate}
+                        </li>
+                    </ul>
+                `
+                $("#result").html(output)
+            },
+            error:function(){
+                $("#result").html("failed")
+            }
+        })
+    })
+    $("#p").click(function(){
+        $.ajax({
+            type:"GET",
+            url:"http://localhost:8080/JavaProject/webapi/admin/P",
+            dataType:"json",
+            complete: function(){
+                $("#loader").hide()
+                $("#result").show()
+            },
+            success:function(data){
+                console.log(data)
+                var output=""
+                output += `
+                    <ul>
+                        <li>
+                            Correctly Classified Instances = ${data.correct}%
+                        </li>
+                        <li>
+                            Incorrectly Classified Instances = ${data.incorrect}%
+                        </li>
+                        <li>
+                            Kappa statistic = ${data.kappa}
+                        </li>
+                        <li>
+                            areaUnderROC = ${data.auROC}
+                        </li>
+                        <li>
+                            meanAbsoluteError = ${data.mae}
+                        </li>
+                        <li>
+                            Root mean squared error  = ${data.rmse}
+                        </li>
+                        <li>
+                            Relative absolute error = ${data.rae}
+                        </li>
+                        <li>
+                            Root relative squared error = ${data.rrse}
+                        </li>
+                        <li>
+                            Precision = ${data.precision}
+                        </li>
+                        <li>
+                            Recall = ${data.recal}
+                        </li>
+                        <li>
+                            Fmeasure = ${data.fmeasure}
+                        </li>
+                        <li>
+                            Error Rate = ${data.errorRate}
+                        </li>
+                    </ul>
+                `
+                $("#result").html(output)
+            },
+            error:function(){
+                $("#result").html("failed")
+            }
+        })
+    })
+    $("#adaboostm1").click(function(){
+        $.ajax({
+            type:"GET",
+            url:"http://localhost:8080/JavaProject/webapi/admin/AB",
+            dataType:"json",
+            complete: function(){
+                $("#loader").hide()
+                $("#result").show()
+            },
+            success:function(data){
+                console.log(data)
+                var output=""
+                output += `
+                    <ul>
+                        <li>
+                            Correctly Classified Instances = ${data.correct}%
+                        </li>
+                        <li>
+                            Incorrectly Classified Instances = ${data.incorrect}%
+                        </li>
+                        <li>
+                            Kappa statistic = ${data.kappa}
+                        </li>
+                        <li>
+                            areaUnderROC = ${data.auROC}
+                        </li>
+                        <li>
+                            meanAbsoluteError = ${data.mae}
+                        </li>
+                        <li>
+                            Root mean squared error  = ${data.rmse}
+                        </li>
+                        <li>
+                            Relative absolute error = ${data.rae}
+                        </li>
+                        <li>
+                            Root relative squared error = ${data.rrse}
+                        </li>
+                        <li>
+                            Precision = ${data.precision}
+                        </li>
+                        <li>
+                            Recall = ${data.recal}
+                        </li>
+                        <li>
+                            Fmeasure = ${data.fmeasure}
+                        </li>
+                        <li>
+                            Error Rate = ${data.errorRate}
+                        </li>
+                    </ul>
+                `
+                $("#result").html(output)
+            },
+            error:function(){
+                $("#result").html("failed")
+            }
+        })
+    })
+    $("#ibk").click(function(){
+        $.ajax({
+            type:"GET",
+            url:"http://localhost:8080/JavaProject/webapi/admin/IBk",
+            dataType:"json",
+            complete: function(){
+                $("#loader").hide()
+                $("#result").show()
+            },
+            success:function(data){
+                console.log(data)
+                var output=""
+                output += `
+                    <ul>
+                        <li>
+                            Correctly Classified Instances = ${data.correct}%
+                        </li>
+                        <li>
+                            Incorrectly Classified Instances = ${data.incorrect}%
+                        </li>
+                        <li>
+                            Kappa statistic = ${data.kappa}
+                        </li>
+                        <li>
+                            areaUnderROC = ${data.auROC}
+                        </li>
+                        <li>
+                            meanAbsoluteError = ${data.mae}
+                        </li>
+                        <li>
+                            Root mean squared error  = ${data.rmse}
+                        </li>
+                        <li>
+                            Relative absolute error = ${data.rae}
+                        </li>
+                        <li>
+                            Root relative squared error = ${data.rrse}
+                        </li>
+                        <li>
+                            Precision = ${data.precision}
+                        </li>
+                        <li>
+                            Recall = ${data.recal}
+                        </li>
+                        <li>
+                            Fmeasure = ${data.fmeasure}
+                        </li>
+                        <li>
+                            Error Rate = ${data.errorRate}
+                        </li>
+                    </ul>
+                `
+                $("#result").html(output)
+            },
+            error:function(){
+                $("#result").html("failed")
+            }
+        })
+    })
+    </script>
+</body>
+</html>

@@ -68,7 +68,7 @@ public class WebScrapingController {
 			Elements levelElements = doc1.select(
 					"#fortopscroll > div.container.anno > div:nth-child(2) > div > div.col-md-12.info.blc.noback > div > div > div.col-md-10.col-sm-12.col-xs-12 > ul:nth-child(3) > li:nth-child(3)");
 			if (!levelElements.isEmpty()) {
-				offer1.setLevel(levelElements.get(0).text());
+				offer1.setLevel(levelElements.get(0).text().toLowerCase());
 			}
 			Elements NameElements = doc1.select(Company);
 			if (!NameElements.isEmpty()) {
