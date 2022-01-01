@@ -110,5 +110,7 @@ jest
 kotlin
 jelly
 bash
+typescript
+ts
 type script
 sql server

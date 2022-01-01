@@ -105,7 +105,7 @@ public class UserController {
 	
 	
 	//Matching Method
-	public static int pecentageOfMatch(String[] as0, String[] as1) {
+	public static double pecentageOfMatch(String[] as0, String[] as1) {
 		int n = as0.length;
 		Integer temp = null;
 
@@ -167,7 +167,7 @@ public class UserController {
 		}
 
 		// Calculate word match percentage
-		int per = (int) ((((float) val * 100)) / ((float) (as0.length + as1.length)));
+		double per = (double) ((((float) val * 100)) / ((float) (as0.length + as1.length)));
 		per = 100 - per;
 		return per;
 	}

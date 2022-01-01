@@ -1,4 +1,4 @@
-package org.kadimi.JavaProject.resources;
+ package org.kadimi.JavaProject.resources;
 
 
 

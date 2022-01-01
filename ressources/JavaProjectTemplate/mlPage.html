@@ -10,26 +10,187 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Document</title>
 </head>
-<body>
-    <button id="j48">J48 Model Informations</button>
-    <button id="nb">NaiveBayes Model Informations</button>
-    <button id="p">PART Model Informations</button>
-    <button id="adaboostm1">AdaBoostM1 Model Informations</button>
-    <button id="ibk">IBk Model Informations</button>
-    <div id="loader" >
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25vh;
+    background: url(./ml.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+}
+a{
+    position: relative;
+    display: inline-block;
+    padding: 15px 20px;
+    margin: 40px 0;
+    color: #52517a;
+    text-decoration: none;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    overflow: hidden;
+    margin-right: 50px;
+}
+a:hover{
+    background: #03e9f4;
+    color: #050801;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 200px #03e9f4;
+}
+a:nth-child(1){
+    filter: hue-rotate(300deg);
+}
+a:nth-child(2){
+    filter: hue-rotate(220deg);
+}
+a:nth-child(4){
+    filter: hue-rotate(140deg);
+}
+a:nth-child(5){
+    filter: hue-rotate(70deg);
+}
 
-    </div>
+a span{
+    position: absolute;
+    display: block;
+}
+a span:nth-child(1){
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg,transparent,#03e9f4);
+    animation: animate1 1s linear infinite;
+}
+@keyframes animate1{
+    0%{
+        left: -100%;
+    }
+    50%,100%{
+        left: 100%;
+    }
+}
+a span:nth-child(2){
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg,transparent,#03e9f4);
+    animation: animate2 1s linear infinite;
+    animation-delay: 0.25s;
+}
+@keyframes animate2{
+    0%{
+        top: -100%;
+    }
+    50%,100%{
+        top: 100%;
+    }
+}
+a span:nth-child(3){
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg,transparent,#481a92);
+    animation: animate3 1s linear infinite;
+    animation-delay: 0.50s;
+}
+@keyframes animate3{
+    0%{
+        right: -100%;
+    }
+    50%,100%{
+        right: 100%;
+    }
+}
+
+
+a span:nth-child(4){
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg,transparent,#0f3f88);
+    animation: animate4 1s linear infinite;
+    animation-delay: 0.75s;
+}
+@keyframes animate4{
+    0%{
+        bottom: -100%;
+    }
+    50%,100%{
+        bottom: 100%;
+    }
+}
+#result{
+    position: absolute;
+    top: 25%;
+    font-size: 20px;
+    border: 3px solid rgb(0, 0, 0);
+    padding: 30px;
+    border-radius: 20px;
+    color: rgb(162, 194, 224);
+}
+.back{
+    position: absolute;
+    bottom: 20px;
+}
+</style>
+<body>
+    <a href="#" id="j48">
+        <span></span>
+        <span></span>
+        J48
+    </a>
+    <a href="#" id="nb">
+        <span></span>
+        <span></span>
+        Naive Bayes
+    </a>
+    <a href="#" id="p">
+        <span></span>
+        <span></span>
+        PART
+    </a>
+    <a href="#" id="adaboostm1">
+        <span></span>
+        <span></span>
+        Ada Boost M1
+    </a>
+    <a href="#" id="ibk">
+        <span></span>
+        <span></span>
+        IBk
+    </a>
+
     <div id="result">
 
     </div>
+    <button class="back btn btn-dark">Back</button>
     <script>
+
+    $(".back").click(function(){
+        window.open("./index.html",'_self')
+    })
+    $("#result").hide()
     $("#j48").click(function(){
         $.ajax({
             type:"GET",
             url:"http://localhost:8080/JavaProject/webapi/admin/J48",
             dataType:"json",
             complete: function(){
-                $("#loader").hide()
                 $("#result").show()
             },
             success:function(data){
@@ -38,47 +199,47 @@
                 output += `
                     <ul>
                         <li>
-                            Correctly Classified Instances = ${data.correct}%
+                            Correctly Classified Instances = ${data.correct.toFixed(3)}%
                         </li>
                         <li>
-                            Incorrectly Classified Instances = ${data.incorrect}%
+                            Incorrectly Classified Instances = ${data.incorrect.toFixed(3)}%
                         </li>
                         <li>
-                            Kappa statistic = ${data.kappa}
+                            Kappa statistic = ${data.kappa.toFixed(3)}
                         </li>
                         <li>
-                            areaUnderROC = ${data.auROC}
+                            areaUnderROC = ${data.auROC.toFixed(2)}
                         </li>
                         <li>
-                            meanAbsoluteError = ${data.mae}
+                            meanAbsoluteError = ${data.mae.toFixed(2)}
                         </li>
                         <li>
-                            Root mean squared error  = ${data.rmse}
+                            Root mean squared error  = ${data.rmse.toFixed(3)}
                         </li>
                         <li>
-                            Relative absolute error = ${data.rae}
+                            Relative absolute error = ${data.rae.toFixed(3)}
                         </li>
                         <li>
-                            Root relative squared error = ${data.rrse}
+                            Root relative squared error = ${data.rrse.toFixed(3)}
                         </li>
                         <li>
-                            Precision = ${data.precision}
+                            Precision = ${data.pecision.toFixed(2)}
                         </li>
                         <li>
-                            Recall = ${data.recal}
+                            Recall = ${data.recal.toFixed(2)}
                         </li>
                         <li>
-                            Fmeasure = ${data.fmeasure}
+                            Fmeasure = ${data.fmeasure.toFixed(2)}
                         </li>
                         <li>
-                            Error Rate = ${data.errorRate}
+                            Error Rate = ${data.errorRate.toFixed(3)}
                         </li>
                     </ul>
                 `
                 $("#result").html(output)
             },
             error:function(){
-                $("#result").html("failed")
+                $("#result").html("Testing Models Failed")
             }
         })
     })
@@ -88,56 +249,55 @@
             url:"http://localhost:8080/JavaProject/webapi/admin/NB",
             dataType:"json",
             complete: function(){
-                $("#loader").hide()
                 $("#result").show()
             },
             success:function(data){
                 console.log(data)
                 var output=""
                 output += `
-                    <ul>
+                <ul>
                         <li>
-                            Correctly Classified Instances = ${data.correct}%
+                            Correctly Classified Instances = ${data.correct.toFixed(3)}%
                         </li>
                         <li>
-                            Incorrectly Classified Instances = ${data.incorrect}%
+                            Incorrectly Classified Instances = ${data.incorrect.toFixed(3)}%
                         </li>
                         <li>
-                            Kappa statistic = ${data.kappa}
+                            Kappa statistic = ${data.kappa.toFixed(3)}
                         </li>
                         <li>
-                            areaUnderROC = ${data.auROC}
+                            areaUnderROC = ${data.auROC.toFixed(2)}
                         </li>
                         <li>
-                            meanAbsoluteError = ${data.mae}
+                            meanAbsoluteError = ${data.mae.toFixed(2)}
                         </li>
                         <li>
-                            Root mean squared error  = ${data.rmse}
+                            Root mean squared error  = ${data.rmse.toFixed(3)}
                         </li>
                         <li>
-                            Relative absolute error = ${data.rae}
+                            Relative absolute error = ${data.rae.toFixed(3)}
                         </li>
                         <li>
-                            Root relative squared error = ${data.rrse}
+                            Root relative squared error = ${data.rrse.toFixed(3)}
                         </li>
                         <li>
-                            Precision = ${data.precision}
+                            Precision = ${data.pecision.toFixed(2)}
                         </li>
                         <li>
-                            Recall = ${data.recal}
+                            Recall = ${data.recal.toFixed(2)}
                         </li>
                         <li>
-                            Fmeasure = ${data.fmeasure}
+                            Fmeasure = ${data.fmeasure.toFixed(2)}
                         </li>
                         <li>
-                            Error Rate = ${data.errorRate}
+                            Error Rate = ${data.errorRate.toFixed(3)}
                         </li>
                     </ul>
                 `
                 $("#result").html(output)
             },
             error:function(){
-                $("#result").html("failed")
+                $("#result").html("Testing Model Failed")
             }
         })
     })
@@ -147,56 +307,55 @@
             url:"http://localhost:8080/JavaProject/webapi/admin/P",
             dataType:"json",
             complete: function(){
-                $("#loader").hide()
                 $("#result").show()
             },
             success:function(data){
                 console.log(data)
                 var output=""
                 output += `
-                    <ul>
+                <ul>
                         <li>
-                            Correctly Classified Instances = ${data.correct}%
+                            Correctly Classified Instances = ${data.correct.toFixed(3)}%
                         </li>
                         <li>
-                            Incorrectly Classified Instances = ${data.incorrect}%
+                            Incorrectly Classified Instances = ${data.incorrect.toFixed(3)}%
                         </li>
                         <li>
-                            Kappa statistic = ${data.kappa}
+                            Kappa statistic = ${data.kappa.toFixed(3)}
                         </li>
                         <li>
-                            areaUnderROC = ${data.auROC}
+                            areaUnderROC = ${data.auROC.toFixed(2)}
                         </li>
                         <li>
-                            meanAbsoluteError = ${data.mae}
+                            meanAbsoluteError = ${data.mae.toFixed(2)}
                         </li>
                         <li>
-                            Root mean squared error  = ${data.rmse}
+                            Root mean squared error  = ${data.rmse.toFixed(3)}
                         </li>
                         <li>
-                            Relative absolute error = ${data.rae}
+                            Relative absolute error = ${data.rae.toFixed(3)}
                         </li>
                         <li>
-                            Root relative squared error = ${data.rrse}
+                            Root relative squared error = ${data.rrse.toFixed(3)}
                         </li>
                         <li>
-                            Precision = ${data.precision}
+                            Precision = ${data.pecision.toFixed(2)}
                         </li>
                         <li>
-                            Recall = ${data.recal}
+                            Recall = ${data.recal.toFixed(2)}
                         </li>
                         <li>
-                            Fmeasure = ${data.fmeasure}
+                            Fmeasure = ${data.fmeasure.toFixed(2)}
                         </li>
                         <li>
-                            Error Rate = ${data.errorRate}
+                            Error Rate = ${data.errorRate.toFixed(3)}
                         </li>
                     </ul>
                 `
                 $("#result").html(output)
             },
             error:function(){
-                $("#result").html("failed")
+                $("#result").html("Testing Model Failed")
             }
         })
     })
@@ -206,56 +365,55 @@
             url:"http://localhost:8080/JavaProject/webapi/admin/AB",
             dataType:"json",
             complete: function(){
-                $("#loader").hide()
                 $("#result").show()
             },
             success:function(data){
                 console.log(data)
                 var output=""
                 output += `
-                    <ul>
+                <ul>
                         <li>
-                            Correctly Classified Instances = ${data.correct}%
+                            Correctly Classified Instances = ${data.correct.toFixed(3)}%
                         </li>
                         <li>
-                            Incorrectly Classified Instances = ${data.incorrect}%
+                            Incorrectly Classified Instances = ${data.incorrect.toFixed(3)}%
                         </li>
                         <li>
-                            Kappa statistic = ${data.kappa}
+                            Kappa statistic = ${data.kappa.toFixed(3)}
                         </li>
                         <li>
-                            areaUnderROC = ${data.auROC}
+                            areaUnderROC = ${data.auROC.toFixed(2)}
                         </li>
                         <li>
-                            meanAbsoluteError = ${data.mae}
+                            meanAbsoluteError = ${data.mae.toFixed(2)}
                         </li>
                         <li>
-                            Root mean squared error  = ${data.rmse}
+                            Root mean squared error  = ${data.rmse.toFixed(3)}
                         </li>
                         <li>
-                            Relative absolute error = ${data.rae}
+                            Relative absolute error = ${data.rae.toFixed(3)}
                         </li>
                         <li>
-                            Root relative squared error = ${data.rrse}
+                            Root relative squared error = ${data.rrse.toFixed(3)}
                         </li>
                         <li>
-                            Precision = ${data.precision}
+                            Precision = ${data.pecision.toFixed(2)}
                         </li>
                         <li>
-                            Recall = ${data.recal}
+                            Recall = ${data.recal.toFixed(2)}
                         </li>
                         <li>
-                            Fmeasure = ${data.fmeasure}
+                            Fmeasure = ${data.fmeasure.toFixed(2)}
                         </li>
                         <li>
-                            Error Rate = ${data.errorRate}
+                            Error Rate = ${data.errorRate.toFixed(3)}
                         </li>
                     </ul>
                 `
                 $("#result").html(output)
             },
             error:function(){
-                $("#result").html("failed")
+                $("#result").html("Testing Model Failed")
             }
         })
     })
@@ -265,56 +423,55 @@
             url:"http://localhost:8080/JavaProject/webapi/admin/IBk",
             dataType:"json",
             complete: function(){
-                $("#loader").hide()
                 $("#result").show()
             },
             success:function(data){
                 console.log(data)
                 var output=""
                 output += `
-                    <ul>
+                <ul>
                         <li>
-                            Correctly Classified Instances = ${data.correct}%
+                            Correctly Classified Instances = ${data.correct.toFixed(3)}%
                         </li>
                         <li>
-                            Incorrectly Classified Instances = ${data.incorrect}%
+                            Incorrectly Classified Instances = ${data.incorrect.toFixed(3)}%
                         </li>
                         <li>
-                            Kappa statistic = ${data.kappa}
+                            Kappa statistic = ${data.kappa.toFixed(3)}
                         </li>
                         <li>
-                            areaUnderROC = ${data.auROC}
+                            areaUnderROC = ${data.auROC.toFixed(2)}
                         </li>
                         <li>
-                            meanAbsoluteError = ${data.mae}
+                            meanAbsoluteError = ${data.mae.toFixed(2)}
                         </li>
                         <li>
-                            Root mean squared error  = ${data.rmse}
+                            Root mean squared error  = ${data.rmse.toFixed(3)}
                         </li>
                         <li>
-                            Relative absolute error = ${data.rae}
+                            Relative absolute error = ${data.rae.toFixed(3)}
                         </li>
                         <li>
-                            Root relative squared error = ${data.rrse}
+                            Root relative squared error = ${data.rrse.toFixed(3)}
                         </li>
                         <li>
-                            Precision = ${data.precision}
+                            Precision = ${data.pecision.toFixed(2)}
                         </li>
                         <li>
-                            Recall = ${data.recal}
+                            Recall = ${data.recal.toFixed(2)}
                         </li>
                         <li>
-                            Fmeasure = ${data.fmeasure}
+                            Fmeasure = ${data.fmeasure.toFixed(2)}
                         </li>
                         <li>
-                            Error Rate = ${data.errorRate}
+                            Error Rate = ${data.errorRate.toFixed(3)}
                         </li>
                     </ul>
                 `
                 $("#result").html(output)
             },
             error:function(){
-                $("#result").html("failed")
+                $("#result").html("Testing Model Failed")
             }
         })
     })

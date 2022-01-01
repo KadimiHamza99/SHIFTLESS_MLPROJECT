@@ -51,9 +51,9 @@ public class UserResource {
 				// Split by space
 				String[] as0 = competences.split(" , ");
 				String[] as1 = requirements.split(" , ");
-				int matching = UserController.pecentageOfMatch(as0, as1);
-				Match match = new Match(offer.getName(),offer.getTitle(),offer.getLink(),offer.getLocation(),(double) matching);
-				if(matching > 40) {
+				double matching = UserController.pecentageOfMatch(as0, as1);
+				Match match = new Match(offer.getName(),offer.getTitle(),offer.getLink(),offer.getLocation(),matching);
+				if(matching > 30) {
 					ret.add(match);
 				}
 			}

@@ -18,13 +18,17 @@
     </div>
     <script>
     $("#match").click(function(){
+        var host = "http://localhost:8080/JavaProject/webapi/user/"
+        var technologies = "java , hibernate , jee , j2ee , bac +5 et plus"
+        var url = host + technologies
+        console.log(url)
         $("#loader").show()
         $("#loader").html('<img src="ajax-loader.gif"/>')
         $("#result").hide()
         console.log("processing request")
         $.ajax({
             type:"POST",
-            url:"http://localhost:8080/JavaProject/webapi/user/hibernate ,java , angular , php , angularjs , reactjs , j2ee , nodejs , bac +5 et plus",
+            url:url,
             dataType:"json",
             complete: function(){
                 $("#loader").hide()
@@ -46,7 +50,7 @@
                                 ${data[i].Location}
                             </li>
                             <li>
-                                ${data[i].Matching}%
+                                ${data[i].Matching.toFixed(2)}%
                             </li>
                             <li>
                                 <a href="https://www.rekrute.com${data[i].Link}">Link to job</a >

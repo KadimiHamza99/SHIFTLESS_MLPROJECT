@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: #000000;
+        color: aliceblue;
+    }
+    #loader{
+        text-align: center;
+    }
+    .back:hover{
+        color: aqua;
+    }
+    /* .back{
+        position: absolute;
+        left: 15px;
+        top: 10px;
+    } */
+</style>
+<body>
+    <div class="container">
+        <div style="text-align: center;margin-top: 5px;"><button class="btn btn-primary"><a href="./index.html" class="back" style="text-decoration: none; color: aliceblue;">Back</a></button></div>
+        <div id="loader" >
+
+        </div>
+        <div id="result">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" style="text-align: center;">Title</th>
+                        <th scope="col" style="text-align: center;">Company Name</th>
+                        <th scope="col" style="text-align: center;">Location</th>
+                        <th scope="col" style="text-align: center;">Studies Level</th>
+                        <th scope="col" style="text-align: center;">Requirements</th>
+                        <th scope="col" style="text-align: center;">Contract</th>
+                    </tr>
+                </thead>
+                <tbody id="display">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+    $(document).ready(function(){
+        $("#loader").html('<img src="ajax-loader.gif">')
+        $("#loader").show()
+        $("#result").hide()
+        console.log("processing request")
+        $.ajax({
+            type:"GET",
+            url:"http://localhost:8080/JavaProject/webapi/admin/scraping",
+            dataType:"json",
+            complete: function(){
+                $("#loader").hide()
+                $("#result").show()
+            },
+            success:function(data){
+                console.log(data)
+                var output=""
+                for(var i in data){
+                    output += `
+                    <tr>
+                        <th scope="row" style="text-align: center;">${data[i].title}</th>
+                        <td style="text-align: center;">${data[i].name}</td>
+                        <td style="text-align: center;">${data[i].location}</td>
+                        <td style="text-align: center;">${data[i].level}</td>
+                        <td style="text-align: center;">${data[i].req}</td>
+                        <td style="text-align: center;">${data[i].contract}</td>
+                    </tr>
+                    `
+                }
+                $("#display").append(output)
+            },
+            error:function(){
+                $("#result").html("scraping failed")
+            }
+        })
+    })
+    </script>
+</body>
+</html>
