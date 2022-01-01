@@ -11,6 +11,7 @@ html
 html5
 css
 css3
+dockers
 javascript
 jquery
 boostrap
@@ -96,7 +97,7 @@ visualbasic
 unix
 linux
 yarn
-dockers
+docker
 catia
 jdbc
 paas

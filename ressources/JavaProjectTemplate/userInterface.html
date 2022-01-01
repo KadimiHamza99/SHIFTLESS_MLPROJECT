@@ -5,60 +5,268 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
     <title>Document</title>
 </head>
 <body>
-    User Intrerface <br>
-    <button id="match">MATCHING</button>
-    <div id="loader" >
 
+    <style>
+        * {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+        body,
+html {
+    margin: 0;
+    padding: 0;
+	overflow: hidden;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: black;
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.container {
+    max-width: 640px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+
+ul.ks-cboxtags {
+    list-style: none;
+    padding: 20px;
+}
+ul.ks-cboxtags li{
+  display: inline;
+}
+ul.ks-cboxtags li label{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgb(255, 255, 255);
+    color: #000000;
+    border-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all .2s;
+}
+
+ul.ks-cboxtags li label {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+ul.ks-cboxtags li label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    padding: 2px 6px 2px 2px;
+    content: "\f067";
+    transition: transform .3s ease-in-out;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+    content: "\f00c";
+    transform: rotate(-360deg);
+    transition: transform .3s ease-in-out;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+    border: 2px solid #3a325f;
+    background-color: #1e2144;
+    color: #fff;
+    transition: all .2s;
+}
+
+ul.ks-cboxtags li input[type="checkbox"] {
+  display: absolute;
+}
+ul.ks-cboxtags li input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+ul.ks-cboxtags li input[type="checkbox"]:focus + label {
+  border: 2px solid #e9a1ff;
+}
+.noselect {
+    user-select: none;
+}
+
+button {
+	width: 150px;
+	height: 50px;
+	cursor: pointer;
+	border: none;
+    border-radius: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #7f5a83;
+	background-image: linear-gradient(315deg, #140024 0%, #00192b 74%);
+	background-size: 200% 100%;
+	background-position: left;
+	background-repeat: no-repeat;
+	transition: 500ms;
+}
+
+button:before {
+	content: 'Match Job Offers';
+	color: rgba(255,255,255,0.5);
+	font-size: 16px;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 140px;
+	height: 40px;
+	background-color: #1a346d;
+	background-image: linear-gradient(315deg, #000d2a 0%, #140024 74%);
+	transition: 500ms;
+}
+
+button:hover {
+	background-position: right;
+}
+
+button:hover:before {
+	color: rgba(255,255,255,0.8);
+}
+
+button:focus {
+	outline: none;
+}
+#result{
+    color: aliceblue;
+}
+a{
+    text-decoration: none;
+    color: #fff;
+}
+    </style>
+
+
+    <div class="container">
+        <ul class="ks-cboxtags" id="form">
+            <li><input name="tech" type="checkbox" id="checkboxOne" value="html"><label for="checkboxOne">HTML5</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwo" value="css" checked><label for="checkboxTwo">CSS3</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThree" value="javascript" checked><label for="checkboxThree">JavaScript</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFour" value="jquery"><label for="checkboxFour">JQuery</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFive" value="angular"><label for="checkboxFive">Angular</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxSix" value="reactjs" checked><label for="checkboxSix">ReactJS</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxSeven" value="bootstrap"><label for="checkboxSeven">Bootstrap</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxEight" value="ajax"><label for="checkboxEight">AJAX</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxNine" value="vuejs"><label for="checkboxNine">VueJS</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTen" value="typescript"><label for="checkboxTen">TypeScript</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxEleven" value="flutter"><label for="checkboxEleven">Flutter</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwelve" value="xamarin"><label for="checkboxTwelve">Xamarin</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThirteen" value="kotlin"><label for="checkboxThirteen">Kotlin</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFourteen" value="java"><label for="checkboxFourteen">Java</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFifteen" value="php"><label for="checkboxFifteen">PHP</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxSixteen" value="laravel"><label for="checkboxSixteen">Laravel</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxSeventeen" value="hibernate"><label for="checkboxSeventeen">Hibernate</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxEighteen" value="python"><label for="checkboxEighteen">Python</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxNineteen" value="asp.net"><label for="checkboxNineteen">ASP.NET</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwenty" value="jee"><label for="checkboxTwenty">JakartaEE</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwentyOne" value="springboot"><label for="checkboxTwentyOne">Spring Boot</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwentyTwo" value="spring cloud"><label for="checkboxTwentyTwo">Spring Cloud</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwentyThree" value="nodejs"><label for="checkboxTwentyThree">NodeJS</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwentyFour" value="symfony"><label for="checkboxTwentyFour">Symfony</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwentyFive" value="expressjs"><label for="checkboxTwentyFive">ExpressJS</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwentySix" value="oracle"><label for="checkboxTwentySix">Oracle</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwentySeven" value="mysql"><label for="checkboxTwentySeven">MySQL</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwentyEight" value="postgresql"><label for="checkboxTwentyEight">PostgreSQL</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxTwentyNine" value="sql server"><label for="checkboxTwentyNine">SQL Server</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThirty" value="swift"><label for="checkboxThirty">Swift</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThirtyOne" value="mongodb"><label for="checkboxThirtyOne">MongoDB</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThirtyTwo" value="mariadb"><label for="checkboxThirtyTwo">MariaDB</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThirtyThree" value="graphql"><label for="checkboxThirtyThree">GraphQL</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThirtyFour" value="git"><label for="checkboxThirtyFour">GIT</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThirtyFive" value="ionic"><label for="checkboxThirtyFive">Ionic</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThirtySix" value="plsql"><label for="checkboxThirtySix">SQL / PLSQL</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThirtySeven" value="scala"><label for="checkboxThirtySeven">Scala</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThirtyEight" value="sqlite"><label for="checkboxThirtyEight">SQLite</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxThirtyNine" value="hadoop"><label for="checkboxThirtyNine">Hadoop</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFourty" value="spark"><label for="checkboxFourty">Spark</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFourtyOne" value="sap"><label for="checkboxFourtyOne">SAP</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFourtyTwo" value="kubernetes"><label for="checkboxFourtyTwo">Kubernetes</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFourtyThree" value="docker"><label for="checkboxFourtyThree">Docker</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFourtyFour" value="jenkins"><label for="checkboxFourtyFour">Jenkins</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFourtyFive" value="django"><label for="checkboxFourtyFive">Django</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFourtySix" value="kafka"><label for="checkboxFourtySix">Kafka</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFourtySeven" value="azure"><label for="checkboxFourtySeven">Azure</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFourtyEight" value="agile"><label for="checkboxFourtyEight">Agile</label></li>
+            <li><input name="tech" type="checkbox" id="checkboxFourtyNine" value="scrum"><label for="checkboxFourtyNine">Scrum</label></li>
+            <button class="noselect" id="match" type="submit"></button>
+        </ul>
     </div>
     <div id="result">
-
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col" style="text-align: center;">Title</th>
+                    <th scope="col" style="text-align: center;">Company Name</th>
+                    <th scope="col" style="text-align: center;">Location</th>
+                    <th scope="col" style="text-align: center;">Matching</th>
+                    <th scope="col" style="text-align: center;">Link</th>
+                </tr>
+            </thead>
+            <tbody id="display">
+            </tbody>
+        </table>
     </div>
     <script>
+    $("#result").hide()
     $("#match").click(function(){
-        var host = "http://localhost:8080/JavaProject/webapi/user/"
-        var technologies = "java , hibernate , jee , j2ee , bac +5 et plus"
-        var url = host + technologies
-        console.log(url)
-        $("#loader").show()
-        $("#loader").html('<img src="ajax-loader.gif"/>')
+        $("#form").hide()
         $("#result").hide()
-        console.log("processing request")
+        var selectedLanguage = new Array()
+        $('input[name="tech"]:checked').each(function() {
+            selectedLanguage.push(this.value)
+        })
+        var competences = selectedLanguage.join(" , ")
+        var host = "http://localhost:8080/JavaProject/webapi/user/"
+        var url = host + competences
         $.ajax({
             type:"POST",
             url:url,
             dataType:"json",
             complete: function(){
-                $("#loader").hide()
                 $("#result").show()
             },
             success:function(data){
-                console.log(data)
                 var output=""
                 for(var i in data){
                     output += `
-                        <ul>
-                            <li>
-                                ${data[i].Company}
-                            </li>
-                            <li>
-                                ${data[i].Title}
-                            </li>
-                            <li>
-                                ${data[i].Location}
-                            </li>
-                            <li>
-                                ${data[i].Matching.toFixed(2)}%
-                            </li>
-                            <li>
-                                <a href="https://www.rekrute.com${data[i].Link}">Link to job</a >
-                            </li>
-                        </ul>
+                    <tr>
+                        <th scope="row" style="text-align: center;">${data[i].Title}</th>
+                        <td style="text-align: center;">${data[i].Company}</td>
+                        <td style="text-align: center;">${data[i].Location}</td>
+                        <td style="text-align: center;">${data[i].Matching.toFixed(2)}%</td>
+                        <td style="text-align: center;"><a href="https://www.rekrute.com${data[i].Link}">Link to job</a ></td>
+                    </tr>
                     `
                 }
-                $("#result").html(output)
+                $("#display").html(output)
             },
             error:function(){
                 $("#result").html("match failed")
