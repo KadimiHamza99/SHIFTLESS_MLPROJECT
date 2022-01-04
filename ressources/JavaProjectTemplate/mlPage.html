@@ -134,18 +134,42 @@ a span:nth-child(4){
         bottom: 100%;
     }
 }
-#result{
-    position: absolute;
-    top: 25%;
-    font-size: 20px;
-    border: 3px solid rgb(0, 0, 0);
-    padding: 30px;
-    border-radius: 20px;
-    color: rgb(162, 194, 224);
-}
+
 .back{
     position: absolute;
     bottom: 20px;
+}
+
+.check-list {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.check-list li {
+  position: relative;
+  list-style-type: none;
+  padding-left: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.check-list li:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 5px;
+    height: 11px;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    border-color: #00a8a8;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+}
+#result{
+    position: absolute;
+    top: 25%;
+    color: aliceblue;
 }
 </style>
 <body>
@@ -197,42 +221,42 @@ a span:nth-child(4){
                 console.log(data)
                 var output=""
                 output += `
-                    <ul>
+                    <ul class="check-list">
                         <li>
-                            Correctly Classified Instances = ${data.correct.toFixed(3)}%
+                            Correctly Classified Instances = ${data.correct}%
                         </li>
                         <li>
-                            Incorrectly Classified Instances = ${data.incorrect.toFixed(3)}%
+                            Incorrectly Classified Instances = ${data.incorrect}%
                         </li>
                         <li>
-                            Kappa statistic = ${data.kappa.toFixed(3)}
+                            Kappa statistic = ${data.kappa}
                         </li>
                         <li>
-                            areaUnderROC = ${data.auROC.toFixed(2)}
+                            areaUnderROC = ${data.auROC}
                         </li>
                         <li>
-                            meanAbsoluteError = ${data.mae.toFixed(2)}
+                            meanAbsoluteError = ${data.mae}
                         </li>
                         <li>
-                            Root mean squared error  = ${data.rmse.toFixed(3)}
+                            Root mean squared error  = ${data.rmse}
                         </li>
                         <li>
-                            Relative absolute error = ${data.rae.toFixed(3)}
+                            Relative absolute error = ${data.rae}
                         </li>
                         <li>
-                            Root relative squared error = ${data.rrse.toFixed(3)}
+                            Root relative squared error = ${data.rrse}
                         </li>
                         <li>
-                            Precision = ${data.pecision.toFixed(2)}
+                            Precision = ${data.pecision}
                         </li>
                         <li>
-                            Recall = ${data.recal.toFixed(2)}
+                            Recall = ${data.recal}
                         </li>
                         <li>
-                            Fmeasure = ${data.fmeasure.toFixed(2)}
+                            Fmeasure = ${data.fmeasure}
                         </li>
                         <li>
-                            Error Rate = ${data.errorRate.toFixed(3)}
+                            Error Rate = ${data.errorRate}
                         </li>
                     </ul>
                 `
@@ -255,42 +279,42 @@ a span:nth-child(4){
                 console.log(data)
                 var output=""
                 output += `
-                <ul>
+                <ul class="check-list">
                         <li>
-                            Correctly Classified Instances = ${data.correct.toFixed(3)}%
+                            Correctly Classified Instances = ${data.correct}%
                         </li>
                         <li>
-                            Incorrectly Classified Instances = ${data.incorrect.toFixed(3)}%
+                            Incorrectly Classified Instances = ${data.incorrect}%
                         </li>
                         <li>
-                            Kappa statistic = ${data.kappa.toFixed(3)}
+                            Kappa statistic = ${data.kappa}
                         </li>
                         <li>
-                            areaUnderROC = ${data.auROC.toFixed(2)}
+                            areaUnderROC = ${data.auROC}
                         </li>
                         <li>
-                            meanAbsoluteError = ${data.mae.toFixed(2)}
+                            meanAbsoluteError = ${data.mae}
                         </li>
                         <li>
-                            Root mean squared error  = ${data.rmse.toFixed(3)}
+                            Root mean squared error  = ${data.rmse}
                         </li>
                         <li>
-                            Relative absolute error = ${data.rae.toFixed(3)}
+                            Relative absolute error = ${data.rae}
                         </li>
                         <li>
-                            Root relative squared error = ${data.rrse.toFixed(3)}
+                            Root relative squared error = ${data.rrse}
                         </li>
                         <li>
-                            Precision = ${data.pecision.toFixed(2)}
+                            Precision = ${data.pecision}
                         </li>
                         <li>
-                            Recall = ${data.recal.toFixed(2)}
+                            Recall = ${data.recal}
                         </li>
                         <li>
-                            Fmeasure = ${data.fmeasure.toFixed(2)}
+                            Fmeasure = ${data.fmeasure}
                         </li>
                         <li>
-                            Error Rate = ${data.errorRate.toFixed(3)}
+                            Error Rate = ${data.errorRate}
                         </li>
                     </ul>
                 `
@@ -313,42 +337,42 @@ a span:nth-child(4){
                 console.log(data)
                 var output=""
                 output += `
-                <ul>
+                <ul  class="check-list">
                         <li>
-                            Correctly Classified Instances = ${data.correct.toFixed(3)}%
+                            Correctly Classified Instances = ${data.correct}%
                         </li>
                         <li>
-                            Incorrectly Classified Instances = ${data.incorrect.toFixed(3)}%
+                            Incorrectly Classified Instances = ${data.incorrect}%
                         </li>
                         <li>
-                            Kappa statistic = ${data.kappa.toFixed(3)}
+                            Kappa statistic = ${data.kappa}
                         </li>
                         <li>
-                            areaUnderROC = ${data.auROC.toFixed(2)}
+                            areaUnderROC = ${data.auROC}
                         </li>
                         <li>
-                            meanAbsoluteError = ${data.mae.toFixed(2)}
+                            meanAbsoluteError = ${data.mae}
                         </li>
                         <li>
-                            Root mean squared error  = ${data.rmse.toFixed(3)}
+                            Root mean squared error  = ${data.rmse}
                         </li>
                         <li>
-                            Relative absolute error = ${data.rae.toFixed(3)}
+                            Relative absolute error = ${data.rae}
                         </li>
                         <li>
-                            Root relative squared error = ${data.rrse.toFixed(3)}
+                            Root relative squared error = ${data.rrse}
                         </li>
                         <li>
-                            Precision = ${data.pecision.toFixed(2)}
+                            Precision = ${data.pecision}
                         </li>
                         <li>
-                            Recall = ${data.recal.toFixed(2)}
+                            Recall = ${data.recal}
                         </li>
                         <li>
-                            Fmeasure = ${data.fmeasure.toFixed(2)}
+                            Fmeasure = ${data.fmeasure}
                         </li>
                         <li>
-                            Error Rate = ${data.errorRate.toFixed(3)}
+                            Error Rate = ${data.errorRate}
                         </li>
                     </ul>
                 `
@@ -371,42 +395,42 @@ a span:nth-child(4){
                 console.log(data)
                 var output=""
                 output += `
-                <ul>
+                <ul  class="check-list">
                         <li>
-                            Correctly Classified Instances = ${data.correct.toFixed(3)}%
+                            Correctly Classified Instances = ${data.correct}%
                         </li>
                         <li>
-                            Incorrectly Classified Instances = ${data.incorrect.toFixed(3)}%
+                            Incorrectly Classified Instances = ${data.incorrect}%
                         </li>
                         <li>
-                            Kappa statistic = ${data.kappa.toFixed(3)}
+                            Kappa statistic = ${data.kappa}
                         </li>
                         <li>
-                            areaUnderROC = ${data.auROC.toFixed(2)}
+                            areaUnderROC = ${data.auROC}
                         </li>
                         <li>
-                            meanAbsoluteError = ${data.mae.toFixed(2)}
+                            meanAbsoluteError = ${data.mae}
                         </li>
                         <li>
-                            Root mean squared error  = ${data.rmse.toFixed(3)}
+                            Root mean squared error  = ${data.rmse}
                         </li>
                         <li>
-                            Relative absolute error = ${data.rae.toFixed(3)}
+                            Relative absolute error = ${data.rae}
                         </li>
                         <li>
-                            Root relative squared error = ${data.rrse.toFixed(3)}
+                            Root relative squared error = ${data.rrse}
                         </li>
                         <li>
-                            Precision = ${data.pecision.toFixed(2)}
+                            Precision = ${data.pecision}
                         </li>
                         <li>
-                            Recall = ${data.recal.toFixed(2)}
+                            Recall = ${data.recal}
                         </li>
                         <li>
-                            Fmeasure = ${data.fmeasure.toFixed(2)}
+                            Fmeasure = ${data.fmeasure}
                         </li>
                         <li>
-                            Error Rate = ${data.errorRate.toFixed(3)}
+                            Error Rate = ${data.errorRate}
                         </li>
                     </ul>
                 `
@@ -429,42 +453,42 @@ a span:nth-child(4){
                 console.log(data)
                 var output=""
                 output += `
-                <ul>
+                <ul class="check-list">
                         <li>
-                            Correctly Classified Instances = ${data.correct.toFixed(3)}%
+                            Correctly Classified Instances = ${data.correct}%
                         </li>
                         <li>
-                            Incorrectly Classified Instances = ${data.incorrect.toFixed(3)}%
+                            Incorrectly Classified Instances = ${data.incorrect}%
                         </li>
                         <li>
-                            Kappa statistic = ${data.kappa.toFixed(3)}
+                            Kappa statistic = ${data.kappa}
                         </li>
                         <li>
-                            areaUnderROC = ${data.auROC.toFixed(2)}
+                            areaUnderROC = ${data.auROC}
                         </li>
                         <li>
-                            meanAbsoluteError = ${data.mae.toFixed(2)}
+                            meanAbsoluteError = ${data.mae}
                         </li>
                         <li>
-                            Root mean squared error  = ${data.rmse.toFixed(3)}
+                            Root mean squared error  = ${data.rmse}
                         </li>
                         <li>
-                            Relative absolute error = ${data.rae.toFixed(3)}
+                            Relative absolute error = ${data.rae}
                         </li>
                         <li>
-                            Root relative squared error = ${data.rrse.toFixed(3)}
+                            Root relative squared error = ${data.rrse}
                         </li>
                         <li>
-                            Precision = ${data.pecision.toFixed(2)}
+                            Precision = ${data.pecision}
                         </li>
                         <li>
-                            Recall = ${data.recal.toFixed(2)}
+                            Recall = ${data.recal}
                         </li>
                         <li>
-                            Fmeasure = ${data.fmeasure.toFixed(2)}
+                            Fmeasure = ${data.fmeasure}
                         </li>
                         <li>
-                            Error Rate = ${data.errorRate.toFixed(3)}
+                            Error Rate = ${data.errorRate}
                         </li>
                     </ul>
                 `

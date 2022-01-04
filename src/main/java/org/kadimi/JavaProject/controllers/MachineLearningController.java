@@ -65,26 +65,7 @@ public class MachineLearningController {
 		return ER;
 	}
 
-	public static void afficherTabConsole(String r, String p) {
-		String rString="";
-		String pString="";
-		int rSpace = 150-r.length();
-		int pSpace = 150-r.length();
-		rString=r;
-		pString=p;
-		while(rSpace>0) {
-			rString+=" ";
-			rSpace--;
-		}
-		rString+="|";
-		while(pSpace>0) {
-			pString+=" ";
-			pSpace--;
-		}
-		pString+="";
-		System.out.println(rString+pString);
-	}
-
+	
 	public static EvaluationResults predictRequirementsNB(String InputArff) throws Exception {
 
 		// convert the csv file of scraping into a arff file
@@ -231,12 +212,12 @@ public class MachineLearningController {
 
 		// convert the csv file of scraping into a arff file
 		ConverterUtils.DataSource source = new ConverterUtils.DataSource(arff);
-		// =====Requirements Training==========//
+		
 		Instances train = source.getDataSet();
 		// choose the field that i want to train
 		train.setClassIndex(train.numAttributes() - 3);
 		Evaluation eval = new Evaluation(train);
-		// build Naive Bayes Model
+		// build J48.PART Model
 		PART model = new PART();
 		model.buildClassifier(train);
 		// Upload the test file arff
@@ -272,6 +253,26 @@ public class MachineLearningController {
 		ER.setFmeasure(eval.fMeasure(1));
 		ER.setErrorRate(eval.errorRate());
 		return ER;
+	}
+
+	public static void afficherTabConsole(String r, String p) {
+		String rString="";
+		String pString="";
+		int rSpace = 150-r.length();
+		int pSpace = 150-r.length();
+		rString=r;
+		pString=p;
+		while(rSpace>0) {
+			rString+=" ";
+			rSpace--;
+		}
+		rString+="|";
+		while(pSpace>0) {
+			pString+=" ";
+			pSpace--;
+		}
+		pString+="";
+		System.out.println(rString+pString);
 	}
 
 }

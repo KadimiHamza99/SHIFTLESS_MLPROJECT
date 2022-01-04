@@ -22,9 +22,7 @@ public class User implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_USER")
 	private int Id;
-	
-//	@Transient
-//	private List<String> CompetencesList;
+
 	
 	@Column(name="COMPETENCES")
 	private String Competences;
@@ -32,10 +30,6 @@ public class User implements Serializable{
 	//Constructors
 	public User() { }
 	
-//	public User(String competences,List<String> liste) {
-//		Competences = competences;
-//		CompetencesList = liste;
-//	}
 	public User(String competences) {
 		Competences = competences;
 	}
@@ -53,14 +47,6 @@ public class User implements Serializable{
 	public void setCompetences(String competences) {
 		Competences = competences;
 	}
-	
-//	public List<String> getCompetencesList() {
-//		return CompetencesList;
-//	}
-//
-//	public void setCompetencesList(List<String> competencesList) {
-//		CompetencesList = competencesList;
-//	}
 
 	@Override
 	public String toString() {

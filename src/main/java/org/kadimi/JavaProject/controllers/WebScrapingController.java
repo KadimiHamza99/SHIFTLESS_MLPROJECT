@@ -12,7 +12,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.kadimi.JavaProject.models.Offer;
 
-public class WebScrapingController {
+public class WebScrapingController implements WebScrapingInterface{
 
 	private static final String Company = "#fortopscroll > div.container.anno > div:nth-child(2) > div > div.foruloffemp.col-md-12.blc > h4 > strong";
 	private static final String contract = "tagContrat";
@@ -23,7 +23,7 @@ public class WebScrapingController {
 
 	private static final String technologiesFile = "C:\\JAVAEE\\JavaProject\\ressources\\technologies.txt";
 	
-	protected List<String> getLinks() {
+	public List<String> getLinks() {
 
 //		final String JOB_LEVEL_SELECTOR = "div.section div.holder";
 		List<String> links = new ArrayList<String>();
@@ -50,7 +50,7 @@ public class WebScrapingController {
 		return links;
 	}
 
-	protected List<Offer> extractOffers() throws IOException {
+	public List<Offer> extractOffers() throws IOException {
 
 		List<String> links = this.getLinks();
 		List<Offer> offers = new ArrayList<Offer>();
@@ -104,16 +104,15 @@ public class WebScrapingController {
 			offers.add(offer1);
 
 		}
-		for (Offer offer : offers) {
-			System.out.println(String.format("%s\n", offer.getReq()));
-
-		}
-		System.out.println(offers.size());
+//		for (Offer offer : offers) {
+//			System.out.println(String.format("%s\n", offer.getReq()));
+//		}
+//		System.out.println(offers.size());
 		
 		return offers;
 	}
 
-	private String cleaningProcess(String req) throws IOException {
+	public String cleaningProcess(String req) throws IOException {
 		// get technologies from the technologies file txt and put it in a techs array
 		BufferedReader br = new BufferedReader(new FileReader(technologiesFile));
 		ArrayList<String> techs = new ArrayList<String>();

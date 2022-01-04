@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.kadimi.JavaProject.controllers.AdministratorController;
 import org.kadimi.JavaProject.controllers.UserController;
+import org.kadimi.JavaProject.models.Match;
 import org.kadimi.JavaProject.models.Offer;
 
 import jakarta.ws.rs.POST;
@@ -16,21 +17,6 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/user")
 public class UserResource {
 	private static AdministratorController ac = new AdministratorController();
-	class Match{
-		public String Company;
-		public String Title;
-		public String Link;
-		public String Location;
-		public Double Matching;
-		public Match(String company, String title, String link, String location, Double match) {
-			Company = company;
-			Title = title;
-			Link = link;
-			Location = location;
-			Matching = match;
-		}
-		
-	}
 	
 
 	UserController uc = new UserController();
@@ -45,15 +31,13 @@ public class UserResource {
 			List<Offer> offers = new ArrayList<Offer>();
 			offers = ac.getOffers();
 			for (Offer offer : offers) {
-				String requirements = offer.getReq()+" , "+offer.getLevel();
+				String requirements = offer.getReq();
 				competences = competences.trim().replaceAll("[.?!]", " ");
 				requirements = requirements.trim().replaceAll("[.?!]", " ");
 				// Split by space
-				String[] as0 = competences.split(" , ");
-				String[] as1 = requirements.split(" , ");
-				double matching = UserController.pecentageOfMatch(as0, as1);
-				Match match = new Match(offer.getName(),offer.getTitle(),offer.getLink(),offer.getLocation(),matching);
-				if(matching > 30) {
+				double matching = UserController.pecentageOfMatch(competences,requirements);
+				Match match = new Match(offer.getName(),offer.getTitle(),offer.getLink(),offer.getLocation(),matching*100);
+				if(matching*100 > 30) {
 					ret.add(match);
 				}
 			}

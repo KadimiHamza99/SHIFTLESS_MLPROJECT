@@ -13,19 +13,129 @@
 <style>
     body{
         background-color: #000000;
-        color: aliceblue;
     }
     #loader{
         text-align: center;
     }
-    .back:hover{
-        color: aqua;
+    h2{
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}
+
+/* Table Styles */
+
+.table-wrapper{
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    position: absolute;
+    left: 10px;
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #15012f;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #180125;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+    .fl-table {
+        display: block;
+        width: 100%;
     }
-    /* .back{
-        position: absolute;
-        left: 15px;
-        top: 10px;
-    } */
+    .table-wrapper:before{
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: rgb(0, 0, 0);
+        padding: 0 0 10px;
+    }
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child{
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tbody tr:nth-child(odd) {
+        background: none;
+    }
+    .fl-table tr:nth-child(even) {
+        background: transparent;
+    }
+    .fl-table tr td:nth-child(odd) {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+}
 </style>
 <body>
     <div class="container">
@@ -33,16 +143,18 @@
         <div id="loader" >
 
         </div>
-        <div id="result">
-            <table class="table table-sm">
+        <di id="result">
+            <h2>Scraping Results</h2>
+            <div class="table-wrapper">
+                <table class="fl-table">
                 <thead>
                     <tr>
-                        <th scope="col" style="text-align: center;">Title</th>
-                        <th scope="col" style="text-align: center;">Company Name</th>
-                        <th scope="col" style="text-align: center;">Location</th>
-                        <th scope="col" style="text-align: center;">Studies Level</th>
-                        <th scope="col" style="text-align: center;">Requirements</th>
-                        <th scope="col" style="text-align: center;">Contract</th>
+                        <th>Title</th>
+                        <th>Company Name</th>
+                        <th>Location</th>
+                        <th>Studies Level</th>
+                        <th>Requirements</th>
+                        <th>Contract</th>
                     </tr>
                 </thead>
                 <tbody id="display">
@@ -70,12 +182,12 @@
                 for(var i in data){
                     output += `
                     <tr>
-                        <th scope="row" style="text-align: center;">${data[i].title}</th>
-                        <td style="text-align: center;">${data[i].name}</td>
-                        <td style="text-align: center;">${data[i].location}</td>
-                        <td style="text-align: center;">${data[i].level}</td>
-                        <td style="text-align: center;">${data[i].req}</td>
-                        <td style="text-align: center;">${data[i].contract}</td>
+                        <th>${data[i].title}</th>
+                        <td>${data[i].name}</td>
+                        <td>${data[i].location}</td>
+                        <td>${data[i].level}</td>
+                        <td>${data[i].req}</td>
+                        <td>${data[i].contract}</td>
                     </tr>
                     `
                 }

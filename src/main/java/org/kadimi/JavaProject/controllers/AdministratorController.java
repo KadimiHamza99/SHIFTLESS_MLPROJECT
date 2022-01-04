@@ -6,10 +6,11 @@ import java.util.List;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import org.kadimi.JavaProject.models.EvaluationResults;
 import org.kadimi.JavaProject.models.Offer;
 import org.kadimi.JavaProject.models.User;
 
-public class AdministratorController extends UserController {
+public class AdministratorController extends UserController implements AdministratorInterface{
 	
 	private static final String CSVFile = "C:\\JAVAEE\\JavaProject\\ressources\\OffersCSV.csv";
 	private static final String arff = "C:\\JAVAEE\\JavaProject\\ressources\\Offers.arff";
@@ -82,7 +83,6 @@ public class AdministratorController extends UserController {
 	}
 	
 	public void removeAllOffers() {
-		
 		EntityTransaction transaction = em.getTransaction();
 		try {
 			List<Offer> offersList = this.getOffers();
@@ -97,7 +97,6 @@ public class AdministratorController extends UserController {
 			System.out.println("Removing Offers failed");
 			throw e;
 		}
-		
 	}
 	
 	public List<Offer> javaSoup() throws IOException {
@@ -129,5 +128,24 @@ public class AdministratorController extends UserController {
 		}
 		return O;
 	}
-	
+	public EvaluationResults predictJ48(String arff_test) throws Exception {
+		EvaluationResults reqPred = MachineLearningController.predictRequirementsJ48(arff_test);
+		return reqPred;
+	}
+	public EvaluationResults predictNB(String arff_test) throws Exception {
+		EvaluationResults reqPred = MachineLearningController.predictRequirementsNB(arff_test);
+		return reqPred;
+	}
+	public EvaluationResults predictIBk(String arff_test) throws Exception {
+		EvaluationResults reqPred = MachineLearningController.predictRequirementsIBk(arff_test);
+		return reqPred;
+	}
+	public EvaluationResults predictAdaBoostM1(String arff_test) throws Exception {
+		EvaluationResults reqPred = MachineLearningController.predictRequirementsAdaBoostM1(arff_test);
+		return reqPred;
+	}
+	public EvaluationResults predictPART(String arff_test) throws Exception {
+		EvaluationResults reqPred = MachineLearningController.predictRequirementsPART(arff_test);
+		return reqPred;
+	}
 }

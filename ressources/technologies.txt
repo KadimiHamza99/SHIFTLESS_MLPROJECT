@@ -115,3 +115,4 @@ typescript
 ts
 type script
 sql server
+ansible

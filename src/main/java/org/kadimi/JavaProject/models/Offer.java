@@ -23,13 +23,14 @@ public class Offer {
 	@Column(name="STUDIES_LEVEL",length=6000)
 	private String level;
 	@Column(name="REQUIREMENTS",length=6000)
-//	@Transient
 	private String req;
 	@Column(name="LINK",length=300)
 	private String link;
 	@Column(name="LOCATION")
 	private String Location;
 
+	public Offer() {	}
+	
 	public Offer(Long idOffer, String title, String name, String contract, String level, String req, String link,
 			String location) {
 		super();
@@ -50,8 +51,6 @@ public class Offer {
 	public void setLink(String link) {
 		this.link = link;
 	}
-
-	public Offer() {	}
 	
 	@Override
 	public String toString() {
